@@ -2429,16 +2429,24 @@ Remove or comment-out the code block below to see how the browser will fall-back
 
 
 
-      .ball {
-        position: absolute;
+       .ball {
+        position: fixed;
         border-radius: 100%;
         opacity: 0.7;
         background-size:cover;
       }
       
       
+       @media screen and (max-width: 900px) {
+        .ball {
+            position: fixed;
+            border-radius: 100%;
+            opacity: 0.7;
+            background-size:cover;
+          }
+    
 
-
+      } 
 
 
 
