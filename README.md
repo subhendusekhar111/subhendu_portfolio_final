@@ -1,6 +1,6 @@
-# Heroku-Deployment
+# My Portfolio Website
 
-Deloyed my Portfolio Website to Heroku..
+My Portfolio Website.
 
 ## Procedure
 
