@@ -65,6 +65,7 @@
         <div id='stars'></div>
         <div id='stars2'></div>
         <div id='stars3'></div>
+
         
         <div class="block content-1170 center-relative">
          
@@ -95,7 +96,6 @@
                                   <br> <br>
                                  
                                   <div id="loading" style="text-align: center; color: white; ">THIS IS RAHUL</div>
-                                 
                                 <br> 
 
                                 <section class="pen">
@@ -178,6 +178,13 @@
                         <a href="https://www.instagram.com/r.a.h.u.l15.82/" target="blank">Instagram</a>
                         
                     </li>
+<br><br>
+                    <center>
+                        <li  style="font-family: 'Fredericka the Great', cursive; font-weight: bolder; color: white;">Developed By Rahul kumar Patro</li>
+                    </center>
+                    <center>
+                        <li  style="font-family: 'Fredericka the Great', cursive; font-weight: bolder; color: white;">(Copyright © RKP)</li>
+                    </center>
                     <li class="right-footer-contnet">
                         
                     </li>
@@ -204,7 +211,7 @@
         <script type="text/javascript" src="js/main.js"></script>
 
         <script>
-            alphabet = new Array("!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "-", "=", "[", "]", "{", "}", "/", "?","<", ">", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+alphabet = new Array("!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "-", "=", "[", "]", "{", "}", "/", "?","<", ">", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 letter_count = 0;
 el = $("#loading");
 word = el.html().trim();
@@ -247,7 +254,52 @@ function reset() {
   setTimeout(write, 500);
   $("span").removeClass("glow");
 }
-        </script>
+
+
+alphabet = new Array("!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "-", "=", "[", "]", "{", "}", "/", "?","<", ">", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+letter_count = 0;
+el = $("#loading1");
+word = el.html().trim();
+finished = false;
+
+el.html("");
+for (var i = 0; i < word.length; i++) {
+  el.append("<span>"+word.charAt(i)+"</span>");
+}
+
+setTimeout(write, 150);
+incrementer = setTimeout(inc, 400);
+
+function write() {
+  for (var i = letter_count; i < word.length; i++) {
+    var c = Math.floor(Math.random() * 36);
+    $("span")[i].innerHTML = alphabet[c];
+  }
+  if (!finished) {
+    setTimeout(write, 150);
+  }
+}
+
+function inc() {
+  $("span")[letter_count].innerHTML = word[letter_count];
+  $("span:eq("+letter_count+")").addClass("glow");
+  letter_count++;
+  if (letter_count >= word.length) {
+    finished = true;
+    setTimeout(reset, 1500);
+  } else {
+    setTimeout(inc, 250);
+  }
+}
+
+function reset() {
+  letter_count = 0;
+  finished = false;
+  setTimeout(inc, 500);
+  setTimeout(write, 500);
+  $("span").removeClass("glow");
+}
+</script>
   
 
 

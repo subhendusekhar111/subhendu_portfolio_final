@@ -433,44 +433,28 @@ class TypeWriter {
     }
   }
   
-  // Init On DOM Load
-  document.addEventListener("DOMContentLoaded", init);
+//   // Init On DOM Load
+//   document.addEventListener("DOMContentLoaded", init);
   
-  // Init App
-  function init() {
-    const txtElement = document.querySelector(".txt-type");
-    // const words = JSON.parse(txtElement.getAttribute("data-words"));
-    const wait = txtElement.getAttribute("data-wait");
-    // Init TypeWriter
-    new TypeWriter(txtElement, words, wait);
-  }
+//   // Init App
+//   function init() {
+//     const txtElement = document.querySelector(".txt-type");
+//     // const words = JSON.parse(txtElement.getAttribute("data-words"));
+//     const wait = txtElement.getAttribute("data-wait");
+//     // Init TypeWriter
+//     new TypeWriter(txtElement, words, wait);
+//   }
   
 
 // Preloader
 
-$(window).on('load', function() { // makes sure the whole site is loaded 
-    $('#status').fadeOut(4000); // will first fade out the loading animation 
-    $('#preloader').delay(4000).fadeOut('slow'); // will fade out the white DIV that covers the website. 
-    $('body').delay(2000).css({'overflow':'visible'});
-  })
-
-
-  $(document).ready(function () {
-    var owl = $(".timeline-carousel");
-  
-    owl.owlCarousel({
-      itemsCustom: [
-        [0, 1],
-        [500, 2],
-        [768, 3],
-        [1024, 4],
-        [1350, 5],
-        [2000, 6]
-      ],
-      navigation: true
-    });
+jQuery(window).on('load', function() { // makes sure the whole site is loaded 
+    jQuery('#status').fadeOut(4000); // will first fade out the loading animation 
+    jQuery('#preloader').delay(3000).fadeOut('fast'); // will fade out the white DIV that covers the website. 
+    jQuery('body').delay(1000).css({'overflow':'visible'});
   });
   
+
 
 
 
