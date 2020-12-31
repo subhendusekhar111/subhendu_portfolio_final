@@ -2284,9 +2284,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
       #loading{
         font-size: 30px;
     }
-    #loading1{
-        font-size: 30px;
-    }
 
       @media screen and (max-width: 900px) {
         #loading{
