@@ -7,6 +7,7 @@ My Portfolio Website.
 ✔️ Summary and About me\
 ✔️ Skills \
 ✔️ Experience\
+✔️ Projects\
 ✔️ Certifications 🏆\
 ✔️ Education\
 ✔️ Contact me
