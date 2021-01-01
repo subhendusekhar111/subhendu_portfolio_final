@@ -2,7 +2,17 @@
 
 My Portfolio Website.
 
-## Procedure
+# Sections 📚
+
+✔️ Summary and About me\
+✔️ Skills \
+✔️ Experience\
+✔️ Certifications 🏆\
+✔️ Education\
+✔️ Contact me
+
+# Deployment 📦
+
 
 We can trick Heroku into deploying our static site simply by adding one dynamic file.
 
