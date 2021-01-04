@@ -25,4 +25,4 @@ Because Heroku PHP Support will be applied to applications only when the applica
 
 Even if an application has no Composer dependencies, it must include an empty composer.json in order to be recognized as a PHP application.
 
-i had used this procedure as Heroku is a hosting platform where we can deploy dynamic applications in Rails, PHP, Node.js and Python..
+i had used this procedure as Heroku is a hosting platform where we can deploy dynamic applications in Rails, PHP, Node.js and Python.
