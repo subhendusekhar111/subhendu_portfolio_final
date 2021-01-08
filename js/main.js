@@ -1,7 +1,7 @@
 jQuery(document).ready(function () {
 
     jQuery("body").queryLoader2({
-        barColor: '#b1b1b1',
+        barColor: 'black',
        
         percentage: false,
         barHeight: 10,
