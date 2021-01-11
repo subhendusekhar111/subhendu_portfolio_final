@@ -10,7 +10,7 @@ My Portfolio Website.
 ✔️ Projects\
 ✔️ Certifications 🏆\
 ✔️ Education\
-✔️ Contact me
+
 
 # Deployment 📦
 
