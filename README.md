@@ -7,7 +7,7 @@
 ### Website Preview
 <p align="center"> 
   <kbd>
-    <a href="https://rahul15.now.sh/" target="_blank"><img src="images/example.jpg">
+    <a href="https://rahul15.now.sh/" target="_blank"><img src="images/example.JPG">
   </a>
   </kbd>
 </p>
