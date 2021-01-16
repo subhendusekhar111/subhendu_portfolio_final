@@ -1,28 +1,64 @@
 # My Portfolio Website
 
-My Portfolio Website.
+> A clean, beautiful, Responsive Portfolio template!
+
+> https://rahul15.now.sh/
+
+### Website Preview
+<p align="center"> 
+  <kbd>
+    <a href="https://rahul15.now.sh/" target="_blank"><img src="images/example.jpg">
+  </a>
+  </kbd>
+</p>
+
+:star: Star me on GitHub — it helps!
+
+## Features 📋
+⚡️ Fully Responsive\
+⚡️ Valid HTML5 & CSS & Javascript\
+⚡️ Easy to modify
 
 # Sections 📚
 
-✔️ Summary and About me\
-✔️ Skills \
-✔️ Experience\
-✔️ Projects\
-✔️ Certifications 🏆\
 ✔️ Education\
+✔️ Summary and About me\
+✔️ Experience\
+✔️ Projects And Blogs\
+✔️ Certifications 🏆\
+
+To view a live example, **[click here](https://rahul15.now.sh/)**
+
+## Want to Contribute 💡
+#### Step 1
+
+- **Option 1**
+    - 🍴 Fork this repo!
+
+- **Option 2**
+    - 👯 Clone this repo to your local machine.
+
+
+#### Step 2
+
+- **Build your code** 🔨🔨🔨
+
+#### Step 3
+
+- 🔃 Create a new pull request.
 
 
 # Deployment 📦
 
+This Web Application is deployed to Vercel.
 
-We can trick Heroku into deploying our static site simply by adding one dynamic file.
+You could also host directly with Vercel by linking your own repository.
 
-I created a new file called index.php in the root directory, and write the following line in the file: <?php include_once("home.html"); ?> .
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world)
 
-Next, I created a composer.json file in the root directory and write the following line in it: {} .
 
-Because Heroku PHP Support will be applied to applications only when the application has a file named composer.json in the root directory. 
+## License 📄
+This project is licensed under the Apache-2.0 License - see the [LICENSE.md](./LICENSE) file for details.
 
-Even if an application has no Composer dependencies, it must include an empty composer.json in order to be recognized as a PHP application.
 
-i had used this procedure as Heroku is a hosting platform where we can deploy dynamic applications in Rails, PHP, Node.js and Python.
+
