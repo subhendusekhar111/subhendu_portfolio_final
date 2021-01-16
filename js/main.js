@@ -450,7 +450,7 @@ class TypeWriter {
 
 jQuery(window).on('load', function() { // makes sure the whole site is loaded 
     jQuery('#status').fadeOut(4000); // will first fade out the loading animation 
-    jQuery('#preloader').delay(3000).fadeOut('fast'); // will fade out the white DIV that covers the website. 
+    jQuery('#preloader').delay(1500).fadeOut('fast'); // will fade out the white DIV that covers the website. 
     jQuery('body').delay(1000).css({'overflow':'visible'});
   });
   
