@@ -4,6 +4,8 @@
 
 > https://rahul15.now.sh/
 
+<p align="center"><img src="https://media.giphy.com/media/9JrkkDoJuU0FbdbUZU/giphy.gif" width = 25% height= 20%></p>
+
 ### Website Preview
 <p align="center"> 
   <kbd>
