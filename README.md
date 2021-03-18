@@ -9,7 +9,7 @@
 ### Website Preview
 <p align="center"> 
   <kbd>
-    <a href="https://rahul15.now.sh/" target="_blank"><img src="images/example.JPG">
+    <a href="https://rahul15.now.sh/" target="_blank"><img src="images/readme1.JPG">
   </a>
   </kbd>
 </p>
@@ -23,11 +23,12 @@
 
 # Sections 📚
 
-✔️ Education\
-✔️ Summary and About me\
-✔️ Experience\
+✔️ About Me\
+✔️ Resume\
+✔️ Work Experience\
 ✔️ Projects And Blogs\
-✔️ Certifications 🏆\
+✔️ Interests And Hobbies\
+✔️ Contact Me\
 
 To view a live example, **[click here](https://rahul15.now.sh/)**
 

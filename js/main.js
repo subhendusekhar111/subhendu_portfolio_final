@@ -1,501 +1,293 @@
-jQuery(document).ready(function () {
+/** 
+ * ===================================================================
+ * main js
+ *
+ * ------------------------------------------------------------------- 
+ */ 
 
-    jQuery("body").queryLoader2({
-        barColor: 'black',
-       
-        percentage: false,
-        barHeight: 10,
-        
-        onComplete: function () {
-            jQuery('.doc-loader').fadeOut('fast');
-        }
-    });
+(function($) {
 
-    //Disable niceScroll for Safari on Win
-    var ua = navigator.userAgent.toLowerCase();
-    if ((ua.indexOf("safari/") !== -1 && ua.indexOf("windows") !== -1 && ua.indexOf("chrom") === -1) || is_touch_device())
-    {
-        jQuery("html").css('overflow', 'auto');
+	"use strict";
 
-        jQuery(".scroll-top").click(function () {
-            jQuery('html, body').animate({scrollTop: 0}, 2000);
-            return false;
-        });
+	/*---------------------------------------------------- */
+	/* Preloader
+	------------------------------------------------------ */ 
+   $(window).load(function() {
 
-    } else
-    {
-        jQuery("html, #header-main-menu").niceScroll({cursorcolor: "#CDC8C1", scrollspeed: 100, mousescrollstep: 80, cursorwidth: "12px", cursorborder: "none", cursorborderradius: "0px"});
+      // will first fade out the loading animation 
+    	$("#loader").fadeOut("slow", function(){
 
-        //Scroll Top animation
-        jQuery(".scroll-top").click(function () {
-            jQuery("html").getNiceScroll(0).doScrollTop(0);
-        });
+        // will fade out the whole DIV that covers the website.
+        $("#preloader").delay(300).fadeOut("slow");
+
+      });       
+
+  	})
 
 
-        jQuery(".big-menu").mouseover(function () {
-            jQuery("#header-main-menu").getNiceScroll().resize();
-        });
-    }
+  	/*---------------------------------------------------- */
+  	/* FitText Settings
+  	------------------------------------------------------ */
+  	setTimeout(function() {
+
+   	$('#intro h1').fitText(1, { minFontSize: '42px', maxFontSize: '84px' });
+
+  	}, 100);
 
 
-    //Placeholder show/hide
-    jQuery('input, textarea').focus(function () {
-        jQuery(this).data('placeholder', jQuery(this).attr('placeholder'));
-        jQuery(this).attr('placeholder', '');
-    });
-    jQuery('input, textarea').blur(function () {
-        jQuery(this).attr('placeholder', jQuery(this).data('placeholder'));
-    });
-
-});
-
-jQuery(window).load(function () {
-
-    if (jQuery(document).width() <= 755)
-    {
-        jQuery('#header-main-menu').removeClass('big-menu').addClass('small-menu');
-    }
+	/*---------------------------------------------------- */
+	/* FitVids
+	------------------------------------------------------ */ 
+  	$(".fluid-video-wrapper").fitVids();
 
 
-    jQuery(".image-slider").each(function () {
-
-        var id = jQuery(this).attr('id');
-
-        if (window[id + '_pagination'] == 'true')
-        {
-            var pagination_value = '.' + id + '_pagination';
-        } else
-        {
-            var pagination_value = false;
-        }
-
-        var auto_value = window[id + '_auto'];
-        if (auto_value == 'false')
-        {
-            auto_value = false;
-        } else {
-            auto_value = true;
-        }
-
-        var hover_pause = window[id + '_hover'];
-        if (hover_pause == 'true')
-        {
-            hover_pause = 'resume';
-        } else {
-            hover_pause = false;
-        }
-
-        var speed_value = window[id + '_speed'];
-
-        jQuery('#' + id).carouFredSel({
-            responsive: true,
-            width: 'variable',
-            auto: {
-                play: auto_value,
-                pauseOnHover: hover_pause
-            },
-            pagination: pagination_value,
-            scroll: {
-                fx: 'crossfade',
-                duration: parseFloat(speed_value)
-            },
-            swipe: {
-                onMouse: true,
-                onTouch: true
-            },
-            items: {
-                height: 'variable'
-            }
-        });
+	/*---------------------------------------------------- */
+	/* Owl Carousel
+	------------------------------------------------------ */ 
+	$("#owl-slider").owlCarousel({
+        navigation: false,
+        pagination: true,
+        itemsCustom : [
+	        [0, 1],
+	        [700, 2],
+	        [960, 3]
+	     ],
+        navigationText: false
     });
 
 
-
-    //Fix for post title position
-    jQuery('.blog-holder').find('article').each(function () {
-        if (jQuery(this).find('.post-thumb').length)
-        {
-            jQuery(this).find('.entry-title').css('margin-top', (jQuery(this).height() - jQuery(this).find('.entry-title').height()) / 2 - 20);
-        }
-    });
-
-    //Fix for page header title position
-    jQuery('.page .header-image h1.entry-title').css('left', (jQuery('.page .header-image').width() - jQuery(".page .header-image h1.entry-title").width()) / 2);
-
-    jQuery('.main-menu').smartmenus({
-        subMenusSubOffsetX: 1,
-        subMenusSubOffsetY: -8,
-        markCurrentItem: true
-    });
-
-    var $mainMenu = jQuery('.main-menu').on('click', 'span.sub-arrow', function (e) {
-        var obj = $mainMenu.data('smartmenus');
-        if (obj.isCollapsible()) {
-            var $item = jQuery(this).parent(),
-                    $sub = $item.parent().dataSM('sub');
-            $sub.dataSM('arrowClicked', true);
-        }
-    }).bind({
-        'beforeshow.smapi': function (e, menu) {
-            var obj = $mainMenu.data('smartmenus');
-            if (obj.isCollapsible()) {
-                var $menu = jQuery(menu);
-                if (!$menu.dataSM('arrowClicked')) {
-                    return false;
-                }
-                $menu.removeDataSM('arrowClicked');
-            }
-        }
-    });
+	/*----------------------------------------------------- */
+	/* Alert Boxes
+  	------------------------------------------------------- */
+	$('.alert-box').on('click', '.close', function() {
+	  $(this).parent().fadeOut(500);
+	});	
 
 
-    jQuery('#toggle, #header-main-menu').on('click', multiClickFunctionStop);
-    jQuery('.main-menu').click(function (e) {
-        e.stopPropagation();
-    });
+	/*----------------------------------------------------- */
+	/* Stat Counter
+  	------------------------------------------------------- */
+   var statSection = $("#stats"),
+       stats = $(".stat-count");
+
+   statSection.waypoint({
+
+   	handler: function(direction) {
+
+      	if (direction === "down") {       		
+
+			   stats.each(function () {
+				   var $this = $(this);
+
+				   $({ Counter: 0 }).animate({ Counter: $this.text() }, {
+				   	duration: 4000,
+				   	easing: 'swing',
+				   	step: function (curValue) {
+				      	$this.text(Math.ceil(curValue));
+				    	}
+				  	});
+				});
+
+       	} 
+
+       	// trigger once only
+       	this.destroy();      	
+
+		},
+			
+		offset: "90%"
+	
+	});	
 
 
-    contactFormWidthFix();
+	/*---------------------------------------------------- */
+	/*	Masonry
+	------------------------------------------------------ */
+	var containerProjects = $('#folio-wrapper');
 
-    //Team member hover
-    jQuery('.team-holder .member').hover(function () {
-        jQuery(this).find('.member-info').fadeIn();
-    }, function () {
-        jQuery(this).find('.member-info').fadeOut();
-    });
+	containerProjects.imagesLoaded( function() {
 
-});
+		containerProjects.masonry( {		  
+		  	itemSelector: '.folio-item',
+		  	resize: true 
+		});
 
-
-jQuery(window).resize(function () {
-
-    contactFormWidthFix();
-
-    if (jQuery(document).width() <= 755)
-    {
-        jQuery('#header-main-menu').removeClass('big-menu').addClass('small-menu');
-    } else
-    {
-        jQuery('#header-main-menu').addClass('big-menu').removeClass('small-menu');
-    }
-
-//Fix for post title position
-    jQuery('.blog-holder').find('article').each(function () {
-        if (jQuery(this).find('.post-thumb').length)
-        {
-            jQuery(this).find('.entry-title').css('margin-top', (jQuery(this).height() - jQuery(this).find('.entry-title').height()) / 2 - 20);
-        }
-    });
-
-    //Fix for page header title position
-    jQuery('.page .header-image h1.entry-title').css('left', (jQuery('.page .header-image').width() - jQuery(".page .header-image h1.entry-title").width()) / 2);
-
-});
-
-//------------------------------------------------------------------------
-//Helper Methods -->
-//------------------------------------------------------------------------
+	});
 
 
-var contactFormWidthFix = function () {
-    jQuery('.contact-form input[type=text], .contact-form input[type=email], .contact-form textarea').outerWidth(jQuery('.contact-form').width());
-};
+	/*----------------------------------------------------*/
+	/*	Modal Popup
+	------------------------------------------------------*/
+   $('.item-wrap a').magnificPopup({
 
-var multiClickFunctionStop = function (e) {
-    if (jQuery(e.target).is('.big-menu') || jQuery(e.target).is('#toggle') || jQuery(e.target).is('#toggle div'))
-    {
-        jQuery('#toggle, .big-menu').off("click");
-        jQuery('#toggle').toggleClass("on");
-        if (jQuery('#toggle').hasClass("on"))
-        {
-            jQuery('#header-main-menu').fadeIn(function () {
-                if (!is_touch_device()) {
-                    var ua = navigator.userAgent.toLowerCase();
-                    if (!(ua.indexOf("safari/") !== -1 && ua.indexOf("windows") !== -1 && ua.indexOf("chrom") === -1))
-                    {
-                        jQuery("html").getNiceScroll().remove();
-                        jQuery("html").css("cssText", "overflow: hidden !important");
-                    }
-                }
-                jQuery('#toggle, .big-menu').on("click", multiClickFunctionStop);
-            });
-        } else
-        {
-            jQuery('#header-main-menu').fadeOut(function () {
-                jQuery('#toggle, .big-menu').on("click", multiClickFunctionStop);
-                if (!is_touch_device()) {
-                    var ua = navigator.userAgent.toLowerCase();
-                    if (!(ua.indexOf("safari/") !== -1 && ua.indexOf("windows") !== -1 && ua.indexOf("chrom") === -1))
-                    {
-                        jQuery("html").niceScroll({cursorcolor: "#CDC8C1", scrollspeed: 100, mousescrollstep: 80, cursorwidth: "12px", cursorborder: "none", cursorborderradius: "0px"});
-                    }
-                }
-            });
-        }
-    }
-};
+      type:'inline',
+      fixedContentPos: false,
+      removalDelay: 300,
+      showCloseBtn: false,
+      mainClass: 'mfp-fade'
 
-jQuery(window).bind("scroll", function () {
-    if (jQuery(this).scrollTop() > 700) {
-        jQuery('.scroll-top').fadeIn(500);
-    } else
-    {
-        jQuery('.scroll-top').fadeOut(500);
-    }
-});
+   });
 
-function isValidEmailAddress(emailAddress) {
-    var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
-    return pattern.test(emailAddress);
-}
+   $(document).on('click', '.popup-modal-dismiss', function (e) {
+   	e.preventDefault();
+   	$.magnificPopup.close();
+   });
+
+	
+	/*-----------------------------------------------------*/
+  	/* Navigation Menu
+   ------------------------------------------------------ */  
+   var toggleButton = $('.menu-toggle'),
+       nav = $('.main-navigation');
+
+   // toggle button
+   toggleButton.on('click', function(e) {
+
+		e.preventDefault();
+		toggleButton.toggleClass('is-clicked');
+		nav.slideToggle();
+
+	});
+
+   // nav items
+  	nav.find('li a').on("click", function() {   
+
+   	// update the toggle button 		
+   	toggleButton.toggleClass('is-clicked'); 
+   	// fadeout the navigation panel
+   	nav.fadeOut();   		
+   	     
+  	});
 
 
-var SendMail = function () {
+   /*---------------------------------------------------- */
+  	/* Highlight the current section in the navigation bar
+  	------------------------------------------------------ */
+	var sections = $("section"),
+	navigation_links = $("#main-nav-wrap li a");	
 
-    var emailVal = jQuery('#contact-email').val();
+	sections.waypoint( {
 
-    if (isValidEmailAddress(emailVal)) {
-        var params = {
-            'action': 'SendMessage',
-            'name': jQuery('#name').val(),
-            'email': jQuery('#contact-email').val(),
-            'subject': jQuery('#subject').val(),
-            'message': jQuery('#message').val()
-        };
-        jQuery.ajax({
-            type: "POST",
-            url: "php/sendMail.php",
-            data: params,
-            success: function (response) {
-                if (response) {
-                    var responseObj = jQuery.parseJSON(response);
-                    if (responseObj.ResponseData)
-                    {
-                        alert(responseObj.ResponseData);
-                    }
-                }
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                //xhr.status : 404, 303, 501...
-                var error = null;
-                switch (xhr.status)
-                {
-                    case "301":
-                        error = "Redirection Error!";
-                        break;
-                    case "307":
-                        error = "Error, temporary server redirection!";
-                        break;
-                    case "400":
-                        error = "Bad request!";
-                        break;
-                    case "404":
-                        error = "Page not found!";
-                        break;
-                    case "500":
-                        error = "Server is currently unavailable!";
-                        break;
-                    default:
-                        error = "Unespected error, please try again later.";
-                }
-                if (error) {
-                    alert(error);
-                }
-            }
-        });
-    } else
-    {
-        alert('Your email is not in valid format');
-    }
-};
+       handler: function(direction) {
 
-function is_touch_device() {
-    return !!('ontouchstart' in window);
-}
+		   var active_section;
+
+			active_section = $('section#' + this.element.id);
+
+			if (direction === "up") active_section = active_section.prev();
+
+			var active_link = $('#main-nav-wrap a[href="#' + active_section.attr("id") + '"]');			
+
+         navigation_links.parent().removeClass("current");
+			active_link.parent().addClass("current");
+
+		}, 
+
+		offset: '25%'
+	});
 
 
-// For Auto Typing
+	/*---------------------------------------------------- */
+  	/* Smooth Scrolling
+  	------------------------------------------------------ */
+  	$('.smoothscroll').on('click', function (e) {
+	 	
+	 	e.preventDefault();
 
-var TxtRotate = function(el, toRotate, period) {
-  this.toRotate = toRotate;
-  this.el = el;
-  this.loopNum = 0;
-  this.period = parseInt(period, 10) || 200;
-  this.txt = '';
-  this.tick();
-  this.isDeleting = false;
-};
- 
-TxtRotate.prototype.tick = function() {
-  var i = this.loopNum % this.toRotate.length;
-  var fullTxt = this.toRotate[i];
- 
-  if (this.isDeleting) {
-    this.txt = fullTxt.substring(0, this.txt.length - 1);
-  } else {
-    this.txt = fullTxt.substring(0, this.txt.length + 1);
-  }
- 
-  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+   	var target = this.hash,
+    	$target = $(target);
 
-   
-  var that = this;
-  var delta = 300 - Math.random() * 100;
- 
-  if (this.isDeleting) { delta /= 2; }
- 
-  if (!this.isDeleting && this.txt === fullTxt) {
-    delta = this.period;
-    this.isDeleting = true;
-  } else if (this.isDeleting && this.txt === '') {
-    this.isDeleting = false;
-    this.loopNum++;
-    delta = 250;
-  }
- 
-  setTimeout(function() {
-    that.tick();
-  }, delta);
-};
- 
-window.onload = function() {
-  var elements = document.getElementsByClassName('txt-rotate');
-  for (var i=0; i<elements.length; i++) {
-    var toRotate = elements[i].getAttribute('data-rotate');
-    var period = elements[i].getAttribute('data-period');
-    if (toRotate) {
-      new TxtRotate(elements[i], JSON.parse(toRotate), period);
-    }
-  }
-  // INJECT CSS
-  var css = document.createElement("style");
-  css.type = "text/css";
-  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
-  document.body.appendChild(css);
-};
+    	$('html, body').stop().animate({
+       	'scrollTop': $target.offset().top
+      }, 800, 'swing', function () {
+      	window.location.hash = target;
+      });
 
-
-
-// First Auto Typing JS
-
-class TypeWriter {
-    constructor(txtElement, words, wait = 3000) {
-      this.txtElement = txtElement;
-      this.words = words;
-      this.txt = "";
-      this.wordIndex = 0;
-      this.wait = parseInt(wait, 10);
-      this.type();
-      this.isDeleting = false;
-    }
-  
-    type() {
-      // Current index of word
-      const current = this.wordIndex % this.words.length;
-      // Get full text of current word
-      const fullTxt = this.words[current];
-  
-      // Check if deleting
-      if (this.isDeleting) {
-        // Remove characters
-        this.txt = fullTxt.substring(0, this.txt.length - 1);
-      } else {
-        // Add charaters
-        this.txt = fullTxt.substring(0, this.txt.length + 1);
-      }
-  
-      // Insert txt into element
-      this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`;
-  
-      // Initial Type Speed
-      let typeSpeed = 300;
-  
-      if (this.isDeleting) {
-        // Increase speed by half when deleting
-        typeSpeed /= 2;
-      }
-  
-      // If word is complete
-      if (!this.isDeleting && this.txt === fullTxt) {
-        // Make pause at end
-        typeSpeed = this.wait;
-        // Set delete to true
-        this.isDeleting = true;
-      } else if (this.isDeleting && this.txt === "") {
-        this.isDeleting = false;
-        // Move to next word
-        this.wordIndex++;
-        // Pause before start typing
-        typeSpeed = 500;
-      }
-  
-      setTimeout(() => this.type(), typeSpeed);
-    }
-  }
-  
-//   // Init On DOM Load
-//   document.addEventListener("DOMContentLoaded", init);
-  
-//   // Init App
-//   function init() {
-//     const txtElement = document.querySelector(".txt-type");
-//     // const words = JSON.parse(txtElement.getAttribute("data-words"));
-//     const wait = txtElement.getAttribute("data-wait");
-//     // Init TypeWriter
-//     new TypeWriter(txtElement, words, wait);
-//   }
+  	});  
   
 
-// Preloader
-
-jQuery(window).on('load', function() { // makes sure the whole site is loaded 
-    jQuery('#status').fadeOut(4000); // will first fade out the loading animation 
-    jQuery('#preloader').delay(1500).fadeOut('fast'); // will fade out the white DIV that covers the website. 
-    jQuery('body').delay(1000).css({'overflow':'visible'});
-  });
-  
+   /*---------------------------------------------------- */
+	/*  Placeholder Plugin Settings
+	------------------------------------------------------ */ 
+	$('input, textarea, select').placeholder()  
 
 
+  	/*---------------------------------------------------- */
+	/*	contact form
+	------------------------------------------------------ */
+
+	/* local validation */
+	// Uses PHP inc/sendEmail.php not supported in github pages
+	// Using formspree instead
+	/* $('#contactForm').validate({
+
+		// submit via ajax
+		submitHandler: function(form) {
+
+			var sLoader = $('#submit-loader');
+
+			$.ajax({      	
+
+		      type: "POST",
+		      url: "inc/sendEmail.php",
+		      data: $(form).serialize(),
+		      beforeSend: function() { 
+
+		      	sLoader.fadeIn(); 
+
+		      },
+		      success: function(msg) {
+
+	            // Message was sent
+	            if (msg == 'OK') {
+	            	sLoader.fadeOut(); 
+	               $('#message-warning').hide();
+	               $('#contactForm').fadeOut();
+	               $('#message-success').fadeIn();   
+	            }
+	            // There was an error
+	            else {
+	            	sLoader.fadeOut(); 
+	               $('#message-warning').html(msg);
+		            $('#message-warning').fadeIn();
+	            }
+
+		      },
+		      error: function() {
+
+		      	sLoader.fadeOut(); 
+		      	$('#message-warning').html("Something went wrong. Please try again.");
+		         $('#message-warning').fadeIn();
+
+		      }
+
+	      });     		
+  		}
+
+	}); */
 
 
+ 	/*----------------------------------------------------- */
+  	/* Back to top
+   ------------------------------------------------------- */ 
+	var pxShow = 300; // height on which the button will show
+	var fadeInTime = 400; // how slow/fast you want the button to show
+	var fadeOutTime = 400; // how slow/fast you want the button to hide
+	var scrollSpeed = 300; // how slow/fast you want the button to scroll to top. can be a value, 'slow', 'normal' or 'fast'
 
-// const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
+   // Show or hide the sticky footer button
+	jQuery(window).scroll(function() {
 
-// const numBalls = 60;
-// const balls = [];
+		if (!( $("#header-search").hasClass('is-visible'))) {
 
-// for (let i = 0; i < numBalls; i++) {
-//   let ball = document.createElement("div");
-//   ball.classList.add("ball");
-//   ball.style.background = colors[Math.floor(Math.random() * colors.length)];
-//   ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
-//   ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
-//   ball.style.transform = `scale(${Math.random()})`;
-//   ball.style.width = `${Math.random()}em`;
-//   ball.style.height = ball.style.width;
-  
-//   balls.push(ball);
-//   document.body.append(ball);
-// }
+			if (jQuery(window).scrollTop() >= pxShow) {
+				jQuery("#go-top").fadeIn(fadeInTime);
+			} else {
+				jQuery("#go-top").fadeOut(fadeOutTime);
+			}
 
-// // Keyframes
-// balls.forEach((el, i, ra) => {
-//   let to = {
-//     x: Math.random() * (i % 2 === 0 ? -11 : 11),
-//     y: Math.random() * 12
-//   };
+		}		
 
-//   let anim = el.animate(
-//     [
-//       { transform: "translate(0, 0)" },
-//       { transform: `translate(${to.x}rem, ${to.y}rem)` }
-//     ],
-//     {
-//       duration: (Math.random() + 1) * 2000, // random duration
-//       direction: "alternate",
-//       fill: "both",
-//       iterations: Infinity,
-//       easing: "ease-in-out"
-//     }
-//   );
-// });
+	});		
+
+})(jQuery);
