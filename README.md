@@ -28,7 +28,7 @@
 ✔️ Work Experience\
 ✔️ Projects And Blogs\
 ✔️ Interests And Hobbies\
-✔️ Contact Me\
+✔️ Contact Me
 
 To view a live example, **[click here](https://rahul15.now.sh/)**
 
